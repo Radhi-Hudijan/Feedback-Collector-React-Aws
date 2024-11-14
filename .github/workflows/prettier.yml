@@ -31,5 +31,5 @@ jobs:
         working-directory: ./client
 
       - name: Run Prettier
-        run: npm run prettier
+        run: npm run prettier --write ./client
         working-directory: ./client
