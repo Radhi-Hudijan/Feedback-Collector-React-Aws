@@ -1,4 +1,4 @@
-name: Client Code Lint
+name: Client Code Lint and Prettier
 
 on:
   push:
@@ -32,4 +32,8 @@ jobs:
 
       - name: Lint code
         run: npm run lint
+        working-directory: ./client
+
+      - name: Prettier
+        run: prettier --check .
         working-directory: ./client
