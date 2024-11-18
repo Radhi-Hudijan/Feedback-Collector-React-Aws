@@ -1,4 +1,5 @@
 import Button from "./Button";
+import PropTypes from 'prop-types';
 const Header=()=>{
     return(
         <header className="flex bg-blue-500 text-white p-4 justify-between">
@@ -10,5 +11,8 @@ const Header=()=>{
         </header>
     )
 }
+
+
+Button.propTypes = { children: PropTypes.node.isRequired, to: PropTypes.string.isRequired };
 
 export default Header;

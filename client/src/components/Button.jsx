@@ -1,5 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Button = ({ children, to }) => {
   const navigate = useNavigate();
@@ -16,6 +16,11 @@ const Button = ({ children, to }) => {
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
 };
 
 export default Button;
