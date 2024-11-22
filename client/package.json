@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prettier": "npx run prettier --check ."
+    "prettier": "npx prettier . --check"
   },
   "dependencies": {
     "prettier": "^3.3.3",
