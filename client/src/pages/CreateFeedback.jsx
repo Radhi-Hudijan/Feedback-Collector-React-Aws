@@ -1,8 +1,13 @@
+import FeedbackForm from "../components/FeedbackForm";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 const CreateFeedback = () => {
   return (
-    <div>
-      <h1>Create Feedback</h1>
-    </div>
+    <>
+      <Header />
+      <FeedbackForm />
+      <Footer />
+    </>
   );
 };
 
