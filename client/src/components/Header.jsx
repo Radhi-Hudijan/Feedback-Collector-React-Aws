@@ -6,15 +6,19 @@ const Header = () => {
         <h1 className="content-start text-2xl font-bold">Feedback Page</h1>
       </Button>
       <div className="right-side">
+
         <Button className="content-end" to="/create-feedback">
           Create Feadback
         </Button>
         <Button className="content-end" to="sign">
           LogIn
         </Button>
+
       </div>
+
     </header>
   );
 };
+
 
 export default Header;
