@@ -7,9 +7,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/create-feedback' element={<CreateFeedback />} />
-        <Route path='/sign' element={<Sign />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/create-feedback" element={<CreateFeedback />} />
+        <Route path="/sign" element={<Sign />} />
       </Routes>
     </BrowserRouter>
   );

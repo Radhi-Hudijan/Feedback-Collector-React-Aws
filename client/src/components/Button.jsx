@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Button = ({ children, to }) => {
   const navigate = useNavigate();
@@ -9,8 +9,8 @@ const Button = ({ children, to }) => {
   };
 
   return (
-    <button 
-      onClick={handleClick} 
+    <button
+      onClick={handleClick}
       className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
     >
       {children}
