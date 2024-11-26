@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Button = ({ className , children, to }) => {
+const Button = ({ className, children, to }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,7 +14,6 @@ const Button = ({ className , children, to }) => {
     <button
       onClick={handleClick}
       className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 ${className}`}
-
     >
       {children}
     </button>
