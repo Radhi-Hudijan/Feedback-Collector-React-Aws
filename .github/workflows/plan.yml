@@ -16,6 +16,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v3
 
+      - name: Init
+        run: terraform init
+        working-directory: ./infrastructure/main
+
       - name: Plan
         run: terraform plan
         working-directory: ./infrastructure/main
