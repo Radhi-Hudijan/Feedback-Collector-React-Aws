@@ -33,6 +33,10 @@ jobs:
         run: terraform init
         working-directory: ./infrastructure/main
 
+      - name: Format
+        run: terraform fmt -check
+        working-directory: ./infrastructure/main
+
       - name: Plan
         run: terraform plan
         working-directory: ./infrastructure/main
