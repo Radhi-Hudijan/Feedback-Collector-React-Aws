@@ -1,3 +1,3 @@
-module "init_stack" {
-  source = "../modules/init_stack"
+data "external" "example" {
+  program = ["bash", "${path.module}/generate_modules.sh"]
 }
