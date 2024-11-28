@@ -1,0 +1,42 @@
+name: Terraform Plan
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+
+permissions:
+  contents: read 
+  id-token: write
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: ${{vars.ACTIONS_ROLE}}  #change to reflect your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: eu-central-1
+
+      - name: Init
+        run: terraform init
+        working-directory: ./infrastructure/main
+
+      - name: Format
+        run: terraform fmt -check
+        working-directory: ./infrastructure/main
+
+      - name: Plan
+        run: terraform plan
+        working-directory: ./infrastructure/main
