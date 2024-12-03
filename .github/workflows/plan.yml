@@ -13,6 +13,7 @@ permissions:
   id-token: write
 
 env:
+  tf_version: '1.9.2'
   tg_version: '0.63.3'
   working_dir: 'infrastructure/live/terragrunt.hcl'
 
@@ -26,6 +27,7 @@ jobs:
       - name: Check terragrunt HCL
         uses: gruntwork-io/terragrunt-action@v2
         with:
+          tf_version: ${{env.tf_version}}
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
