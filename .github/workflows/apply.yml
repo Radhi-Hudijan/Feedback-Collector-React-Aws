@@ -13,7 +13,7 @@ permissions:
 env:
   tg_version: '0.63.3'
   tf_version: '1.9.2'
-  working_dir: 'infrastructure/live/terragrunt.hcl'
+  working_dir: 'infrastructure/live/'
 
 
 jobs:
