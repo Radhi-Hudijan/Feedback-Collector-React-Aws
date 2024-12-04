@@ -16,7 +16,7 @@ remote_state {
   }
   config = {
     bucket  = "feedback-app-terraform"
-    key     = "state/terraform.tfstate"
+    key = "${path_relative_to_include()}/terraform.tfstate"
 
     region         = "eu-central-1"
     encrypt        = true
