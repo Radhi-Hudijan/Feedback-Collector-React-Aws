@@ -1,10 +1,7 @@
-name: Terraform Apply
+name: Terragrunt Apply
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -13,6 +10,11 @@ permissions:
   contents: read 
   id-token: write
 
+env:
+  tg_version: '0.63.3'
+  tf_version: '1.9.2'
+  working_dir: 'infrastructure/live/'
+
 
 jobs:
   lint:
@@ -20,25 +22,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: ${{vars.ACTIONS_ROLE}}  #change to reflect your IAM role’s ARN
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: eu-central-1
-
-      - name: Init
-        run: terraform init
-        working-directory: ./infrastructure/main
-
-      - name: Plan
-        run: terraform plan
-        working-directory: ./infrastructure/main
-
-      - name: Apply
-        run: terraform apply
-        working-directory: ./infrastructure/main
-        
-
+      - name: Check terragrunt HCL
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{env.tf_version}}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all plan && run-all apply'
