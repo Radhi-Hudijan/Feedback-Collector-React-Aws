@@ -1,0 +1,52 @@
+name: Terragrunt 
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  tf_version: '1.9.2'
+  tg_version: '0.63.3'
+  working_dir: 'infrastructure/live/'
+
+jobs:
+  terragrunt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: ${{ vars.ACTIONS_ROLE }}  # Update with your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: eu-central-1
+
+      - name: Terragrunt Plan
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all plan'
+
+      - name: Terragrunt Apply (only on main)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success()
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all apply'
