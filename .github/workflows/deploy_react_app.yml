@@ -1,4 +1,3 @@
-# .github/workflows/build-and-deploy-react.yml
 name: Build and Deploy React App
 
 on:
@@ -46,11 +45,9 @@ jobs:
 
       - name: Build React App
         run: npm run build
-        working-directory: ${{ env.app_path }}
 
       - name: Upload to S3
         run: aws s3 sync ./dist s3://${{ env.S3_BUCKET_NAME }}
-        working-directory: ${{ env.APP_PATH }}
 
     #   - name: Invalidate CloudFront Cache (Optional)
     #     if: ${{ github.ref == 'refs/heads/main' }}
