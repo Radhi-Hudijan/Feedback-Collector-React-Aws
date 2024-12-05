@@ -45,6 +45,9 @@ jobs:
 
       - name: Build React App
         run: npm run build
+        working-directory: ./client
+
+        
 
       - name: Upload to S3
         run: aws s3 sync ./dist s3://${{ env.S3_BUCKET_NAME }}
