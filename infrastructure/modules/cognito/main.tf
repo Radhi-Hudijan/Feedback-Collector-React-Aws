@@ -1,10 +1,10 @@
 resource "aws_cognito_user_pool" "feebackPool" {
-  name = "feedback-pool"
+  name = var.user_pool_name
 
 
   schema {
-    name                     = "email"
-    attribute_data_type      = "String"
+    name                     = var.schema_name
+    attribute_data_type      = var.attribute_data_type
     required                 = true
     mutable                  = true
     developer_only_attribute = false
@@ -39,4 +39,17 @@ resource "aws_cognito_user_pool" "feebackPool" {
       priority = 1
     }
   }
+}
+
+
+// Resource for the user pool client
+resource "aws_cognito_user_pool_client" "feedbackClient" {
+  name         = var.client_name
+  user_pool_id = aws_cognito_user_pool.feebackPool.id
+  explicit_auth_flows = [
+    "ALLOW_USER_PASSWORD_AUTH",
+    "ALLOW_REFRESH_TOKEN_AUTH",
+    "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+  ]
+
 }
