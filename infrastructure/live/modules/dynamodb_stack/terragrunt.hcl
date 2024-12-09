@@ -5,3 +5,7 @@ include "root" {
 terraform{
     source ="../../../modules/dynamodb_stack"
 }
+
+inputs = {
+    table_name = "feedback_table"
+}
