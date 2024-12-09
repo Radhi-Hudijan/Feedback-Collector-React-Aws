@@ -8,10 +8,6 @@ output "client_id" {
   description = "value of the client id"
 }
 
-output "client_secret" {
-  value       = aws_cognito_user_pool_client.feedbackClient.client_secret
-  description = "value of the client secret"
-}
 
 output "user_pool_arn" {
   value       = aws_cognito_user_pool.feebackPool.arn
