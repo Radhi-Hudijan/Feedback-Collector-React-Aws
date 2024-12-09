@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "feedback_table" {
-  name         = "feedback"
+  name         = "feedback_table"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "feedback_id"
   range_key    = "user_id"
