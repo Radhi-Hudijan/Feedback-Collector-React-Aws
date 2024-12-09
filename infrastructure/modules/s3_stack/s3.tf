@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "react_hosting" {
-  bucket        = "feadback-app-hosting-bucket"
+  bucket        = var.bucket_name
   force_destroy = true
 }
 
