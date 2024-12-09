@@ -6,7 +6,7 @@ terraform {
   source = "../../../modules/cognito"
 }
 
-input = {
+inputs = {
     user_pool_name = "feedback-app-user-pool"
     client_name = "feedback-app-client"
     callback_urls = ["http://localhost:3000"]   
