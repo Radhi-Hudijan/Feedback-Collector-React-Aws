@@ -1,19 +1,6 @@
 resource "aws_cognito_user_pool" "feebackPool" {
   name = var.user_pool_name
 
-
-  schema {
-    name                     = var.schema_name
-    attribute_data_type      = var.attribute_data_type
-    required                 = true
-    mutable                  = true
-    developer_only_attribute = false
-    string_attribute_constraints {
-      min_length = 0
-      max_length = 2048
-    }
-  }
-
   email_configuration {
     email_sending_account = "COGNITO_DEFAULT"
   }
@@ -46,10 +33,26 @@ resource "aws_cognito_user_pool" "feebackPool" {
 resource "aws_cognito_user_pool_client" "feedbackClient" {
   name         = var.client_name
   user_pool_id = aws_cognito_user_pool.feebackPool.id
-  explicit_auth_flows = [
-    "ALLOW_USER_PASSWORD_AUTH",
-    "ALLOW_REFRESH_TOKEN_AUTH",
-    "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+  supported_identity_providers = [
+    "COGNITO"
   ]
 
+  allowed_oauth_flows_user_pool_client = true
+  allowed_oauth_flows = [
+    "code",
+    "implicit"
+  ]
+  allowed_oauth_scopes = [
+    "email",
+    "openid",
+  ]
+  callback_urls = var.callback_urls
+
+
+
+  generate_secret        = false
+  refresh_token_validity = 1
+  access_token_validity  = 1
+  id_token_validity      = 1
 }
+
