@@ -15,19 +15,19 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket  = "feedback-app-terraform"
-    key = "${path_relative_to_include()}/terraform.tfstate"
+    bucket = "feedback-app-terraform"
+    key    = "${path_relative_to_include()}/terraform.tfstate"
 
-    region         = "eu-central-1"
-    encrypt        = true
+    region  = "eu-central-1"
+    encrypt = true
   }
 }
 
 # Indicate what region to deploy the resources into
 generate "provider" {
-  path = "provider.tf"
+  path      = "provider.tf"
   if_exists = "overwrite_terragrunt"
-  contents = <<EOF
+  contents  = <<EOF
 provider "aws" {
   region = "eu-central-1"
 }

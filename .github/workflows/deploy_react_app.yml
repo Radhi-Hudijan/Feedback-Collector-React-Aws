@@ -1,0 +1,58 @@
+name: Build and Deploy React App
+
+on:
+  workflow_run:
+    workflows: ["Terragrunt"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.terragrunt_apply_status == 'success'
+
+    env:
+      AWS_REGION: eu-central-1
+      S3_BUCKET_NAME: feadback-app-hosting-bucket   # Replace with your actual S3 bucket name
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: ${{ vars.ACTIONS_ROLE }}  # Update with your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION}}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./client
+
+      - name: Build React App
+        run: npm run build
+        working-directory: ./client
+
+        
+
+      - name: Upload to S3
+        run: aws s3 sync ./dist s3://${{ env.S3_BUCKET_NAME }}
+        working-directory: ./client
+
+
+    #   - name: Invalidate CloudFront Cache (Optional)
+    #     if: ${{ github.ref == 'refs/heads/main' }}
+    #     uses: awslabs/aws-cloudfront-action@v1
+    #     with:
+    #       distribution-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+    #       paths: "/*"
