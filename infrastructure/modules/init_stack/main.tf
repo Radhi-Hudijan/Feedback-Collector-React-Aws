@@ -5,7 +5,8 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
 }
 
 resource "aws_iam_role" "github_actions" {
-  name = "github-actions"
+  name                  = "github-actions"
+  force_detach_policies = true
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -26,8 +27,30 @@ resource "aws_iam_role" "github_actions" {
   })
 }
 
-resource "aws_iam_policy_attachment" "this" {
-  name       = "Policy Attachement"
-  roles      = [aws_iam_role.github_actions.name]
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+resource "aws_iam_policy" "github_actions_policy" {
+  name        = "FullAccessPolicy"
+  description = "Policy with full access to S3, DynamoDB, CloudFront, IAM, and Lambda"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:*",
+          "dynamodb:*",
+          "cloudfront:*",
+          "iam:*",
+          "lambda:*",
+          "cognito-idp:*",
+          "cognito-sync:*"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "github_actions_policy_attachment" {
+  policy_arn = aws_iam_policy.github_actions_policy.arn
+  role       = aws_iam_role.github_actions.name
 }
