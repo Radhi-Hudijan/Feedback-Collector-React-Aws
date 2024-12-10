@@ -29,5 +29,5 @@ resource "aws_iam_role" "github_actions" {
 resource "aws_iam_policy_attachment" "this" {
   name       = "Policy Attachement"
   roles      = [aws_iam_role.github_actions.name]
-  policy_arn = "arn:aws:iam::aws:policy/job-function/SystemAdministrator"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
