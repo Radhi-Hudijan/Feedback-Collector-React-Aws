@@ -20,6 +20,8 @@ env:
 jobs:
   terragrunt:
     runs-on: ubuntu-latest
+    outputs:
+      apply_status: ${{ steps.set-output.outputs.status }}
 
     steps:
       - name: Checkout Code
@@ -41,6 +43,7 @@ jobs:
           tg_command: "run-all plan"
 
       - name: Terragrunt Apply (only on main)
+        id: terragrunt_apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push' && success()
         uses: gruntwork-io/terragrunt-action@v2
         with:
@@ -48,3 +51,15 @@ jobs:
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: "run-all apply"
+
+      - name: Set Output
+        id: set-output
+        run: |
+            if [ "${{ steps.terragrunt_apply.outcome }}" == "success" ]; then
+              echo "status=success" >> $GITHUB_OUTPUT
+            else
+              echo "status=failure" >> $GITHUB_OUTPUT
+            fi
+
+
+
