@@ -40,7 +40,9 @@ resource "aws_iam_policy" "github_actions_policy" {
           "dynamodb:*",
           "cloudfront:*",
           "iam:*",
-          "lambda:*"
+          "lambda:*",
+          "cognito-idp:*",
+          "cognito-sync:*"
         ],
         "Resource" : "*"
       }
