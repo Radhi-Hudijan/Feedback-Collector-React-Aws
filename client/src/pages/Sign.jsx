@@ -8,7 +8,7 @@ const Sign = () => {
       formFields={{
         signUp: {
           username: {
-            placeholder: "Enter your username",
+            placeholder: "Enter your Username",
             isRequired: true,
           },
           email: {
