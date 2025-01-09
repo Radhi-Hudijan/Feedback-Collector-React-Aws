@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import "./Custom-amplify-styles.css";
 import HomePage from "./pages/HomePage";
 import CreateFeedback from "./pages/CreateFeedback";
 import Sign from "./pages/Sign";

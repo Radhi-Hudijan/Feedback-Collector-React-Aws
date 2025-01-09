@@ -13,7 +13,7 @@ Amplify.configure(awsExports);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Authenticator.Provider>
-    <App />
+      <App />
     </Authenticator.Provider>
   </StrictMode>
 );
