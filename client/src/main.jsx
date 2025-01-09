@@ -15,5 +15,5 @@ createRoot(document.getElementById("root")).render(
     <Authenticator.Provider>
       <App />
     </Authenticator.Provider>
-  </StrictMode>
+  </StrictMode>,
 );
