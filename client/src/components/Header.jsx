@@ -1,5 +1,16 @@
 import Button from "./Button";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
+
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/sign");
+  };
+
   return (
     <header className="flex bg-blue-500 text-white p-4 justify-between">
       <Button to="/">
@@ -9,9 +20,16 @@ const Header = () => {
         <Button className="content-end" to="/create-feedback">
           Create Feadback
         </Button>
-        <Button className="content-end" to="sign">
-          LogIn
-        </Button>
+
+        {!user ? (
+          <Button className="content-end" to="/sign">
+            Sign In
+          </Button>
+        ) : (
+          <Button className="content-end" onClick={handleSignOut}>
+            Sign Out
+          </Button>
+        )}
       </div>
     </header>
   );
