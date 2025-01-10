@@ -1,0 +1,16 @@
+[data-amplify-authenticator] {
+  --amplify-components-button-primary-background-color: #3c82f6;
+  --amplify-components-button-primary-color: white;
+  --amplify-components-button-primary-border-color: #3c82f6;
+  --amplify-components-button-primary-hover-background-color: rgba(
+    60,
+    131,
+    246,
+    0.7
+  );
+  --amplify-components-button-primary-active-background-color: #3c82f6;
+  --amplify-components-tabs-item-active-border-color: #3c82f6;
+  --amplify-components-tabs-item-active-color: black;
+  --amplify-components-button-link-color: rgb(0, 0, 0);
+  --amplify-components-button-link-hover-color: rgba(0, 0, 0, 0.7);
+}
