@@ -8,10 +8,10 @@ terraform {
 
 dependency "s3" {
     config_path = "../s3_stack"
-    # mock_outputs = {
-    #     bucket_name = "feedback-app-hosting-bucket"
-    #     bucket_arn = "arn:aws:s3:::feedback-app-hosting-bucket"
-    # }
+    mock_outputs = {
+        bucket_name = "feedback-app-hosting-bucket"
+        bucket_arn = "arn:aws:s3:::feedback-app-hosting-bucket"
+    }
 }
 
 
