@@ -32,7 +32,7 @@ resource "aws_apigatewayv2_route" "http_route" {
 resource "aws_lambda_permission" "invoke_lambda" {
     statement_id  = "AllowAPIGatewayInvoke"
     action        = "lambda:InvokeFunction"
-    function_name = var.lambda_function_name
+    function_name = "aws_lambda_function.lambda_function.${var.lambda_function_name}"
     principal     = "apigateway.amazonaws.com"
     source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*"
     
