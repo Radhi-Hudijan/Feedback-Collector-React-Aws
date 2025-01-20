@@ -51,15 +51,3 @@ jobs:
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: "run-all apply"
-
-      - name: Set Output
-        id: set-output
-        run: |
-            if [ "${{ steps.terragrunt_apply.outcome }}" == "success" ]; then
-              echo "status=success" >> $GITHUB_OUTPUT
-            else
-              echo "status=failure" >> $GITHUB_OUTPUT
-            fi
-
-
-
