@@ -8,7 +8,7 @@ terraform {
 }
 
 dependency "create_feedback_function" {
-  config_path = "../backend_functions"
+  config_path = "../../backend_functions"
     mock_outputs = {
         lambda_function_name = "add_feedback"
         invoke_url = "https://api.execute-api.eu-central-1.amazonaws.com/add_feedback"
