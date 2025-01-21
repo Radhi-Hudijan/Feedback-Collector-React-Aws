@@ -4,7 +4,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../../modules/api_gateway"
+  source = "../../../../modules/api_gateway"
 }
 
 dependency "create_feedback_function" {
