@@ -18,6 +18,10 @@ dependency "create_feedback_function" {
 
 dependency "cognito" {
   config_path = "../../cognito"
+    mock_outputs = {
+        cognito_client_id = "8ckehg57gg5ae60m1b2s70igc"
+        cognito_issuer_url = "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_AZ0E6IBOe"
+    }
 }
 
 
