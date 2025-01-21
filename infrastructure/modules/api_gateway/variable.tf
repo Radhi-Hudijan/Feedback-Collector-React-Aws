@@ -10,7 +10,7 @@ variable "integration_method" {
     type        = string
 }
 
-variable "integration_uri" {
+variable "invoke_arn" {
     description = "The URI of the integration"
     type        = string
 }

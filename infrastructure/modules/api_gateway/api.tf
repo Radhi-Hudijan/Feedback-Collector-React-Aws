@@ -19,7 +19,7 @@ resource "aws_apigatewayv2_integration" "http_integration" {
     api_id             = aws_apigatewayv2_api.http_api.id
     integration_type   = "AWS_PROXYY"
     integration_method = var.integration_method
-    integration_uri    = var.integration_uri
+    integration_uri    = "aws_lambda_function.${var.lambda_function_name}.${var.invoke_arn}"
 }
 
 resource "aws_apigatewayv2_route" "http_route" {
