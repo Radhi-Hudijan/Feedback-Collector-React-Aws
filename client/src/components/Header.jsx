@@ -6,8 +6,8 @@ const Header = () => {
 
   const { user, signOut } = useAuthenticator((context) => [context.user]);
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut({ global: true });
     navigate("/sign");
   };
 
