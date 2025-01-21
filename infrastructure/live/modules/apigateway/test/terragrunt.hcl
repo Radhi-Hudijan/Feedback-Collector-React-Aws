@@ -27,7 +27,7 @@ dependency "cognito" {
 
 inputs = {
   api_name = "feedback-api"
-  integration_method = " GET"
+  integration_method = "GET"
   invoke_arn = dependency.create_feedback_function.outputs.lambda_function_invoke_arn
   route_key = "CREATE /feedback" 
   lambda_function_name = dependency.create_feedback_function.outputs.lambda_function_name
