@@ -17,9 +17,9 @@ resource "aws_apigatewayv2_stage" "default" {
 resource "aws_apigatewayv2_integration" "http_integration" {
     description = "HTTP integration"
     api_id             = aws_apigatewayv2_api.http_api.id
-    integration_type   = "AWS_PROXYY"
+    integration_type   = "AWS_PROXY"
     integration_method = var.integration_method
-    integration_uri    = "aws_lambda_function.${var.lambda_function_name}.${var.invoke_arn}"
+    integration_uri    = var.invoke_arn
 }
 
 resource "aws_apigatewayv2_route" "http_route" {
@@ -32,7 +32,7 @@ resource "aws_apigatewayv2_route" "http_route" {
 resource "aws_lambda_permission" "invoke_lambda" {
     statement_id  = "AllowAPIGatewayInvoke"
     action        = "lambda:InvokeFunction"
-    function_name = "aws_lambda_function.lambda_function.${var.lambda_function_name}"
+    function_name = var.lambda_function_name
     principal     = "apigateway.amazonaws.com"
     source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*"
     
