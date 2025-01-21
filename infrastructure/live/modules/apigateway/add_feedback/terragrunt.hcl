@@ -16,6 +16,10 @@ dependency "create_feedback_function" {
     }
 }
 
+dependency "cognito" {
+  config_path = "../../cognito"
+}
+
 
 inputs = {
   api_name = "feedback-api"
@@ -23,4 +27,6 @@ inputs = {
   invoke_arn = dependency.create_feedback_function.outputs.lambda_function_invoke_arn
   route_key = "CREATE /feedback" 
   lambda_function_name = dependency.create_feedback_function.outputs.lambda_function_name
+  cognito_client_id = dependency.cognito.outputs.cognito_client_id
+  cognito_issuer_url = dependency.cognito.outputs.cognito_issuer_url
 }
