@@ -1,6 +1,6 @@
 resource "aws_cloudfront_distribution" "feedback_app" {
   origin {
-    domain_name              = "http://feadback-app-hosting-bucket.s3.eu-central-1.amazonaws.com"
+    domain_name              = var.s3_bucket_name
     origin_id                = var.s3_bucket_name
     origin_access_control_id = aws_cloudfront_origin_access_control.this.id
 
