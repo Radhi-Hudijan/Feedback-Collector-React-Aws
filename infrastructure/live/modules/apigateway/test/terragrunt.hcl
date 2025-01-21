@@ -34,3 +34,5 @@ inputs = {
   cognito_client_id = dependency.cognito.outputs.cognito_client_id
   cognito_issuer_url = dependency.cognito.outputs.cognito_issuer_url
 }
+
+# test
