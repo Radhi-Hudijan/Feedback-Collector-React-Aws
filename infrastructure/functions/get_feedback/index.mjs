@@ -6,12 +6,11 @@ export const handler = async (event) => {
     try {
         const tableName = process.env.TABLE_NAME; // Get the table name from the environment variable
         const feedbackId = event.queryStringParameters?.id; // Get the 'id' from query parameters, if provided
-
         if (feedbackId) {
             // Fetch a specific feedback by ID
             const params = {
                 TableName: tableName,
-                Key: { id: feedbackId },
+                Key: { feedback_id: feedbackId },
             };
 
             const result = await dynamoDB.get(params).promise();
