@@ -1,10 +1,12 @@
 # lambda function outputs
 
-output "lambda_function_name" {
-    value = aws_lambda_function.add_feedback.function_name
+output "create_feedback_function" {
+  value = { name = aws_lambda_function.add_feedback.function_name, invoke_arn = aws_lambda_function.add_feedback.invoke_arn }
+}
+
+output "get_feedback_function" {
+  value = { name = aws_lambda_function.get_feedback.function_name, invoke_arn = aws_lambda_function.get_feedback.invoke_arn }
 }
 
 
-output "lambda_function_invoke_arn" {
-    value = aws_lambda_function.add_feedback.invoke_arn
-}
+
