@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "get_feedback" {
 
-  filename      = "lambda.zip"
-  function_name = "add_feedback"
+  filename      = "get_feedback_lambda.zip"
+  function_name = "get_feedback"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.mjs"
 
@@ -34,7 +34,7 @@ resource "aws_iam_role" "iam_for_get_feedback_lambda" {
 data "archive_file" "get_feedback" {
   type        = "zip"
   source_dir  = "${path.cwd}/../../../../../../functions/get_feedback"
-  output_path = "lambda.zip"
+  output_path = "get_feedback_lambda.zip"
 }
 
 resource "aws_iam_role_policy_attachment" "get_feedback_lambda_basic_execution" {
