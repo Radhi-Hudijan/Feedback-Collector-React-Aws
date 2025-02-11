@@ -1,6 +1,6 @@
 resource "aws_cloudfront_distribution" "feedback_app" {
   origin {
-    domain_name              = "http://feadback-app-hosting-bucket.s3.eu-central-1.amazonaws.com"
+    domain_name              = "${var.s3_bucket_name}.s3.amazonaws.com"
     origin_id                = var.s3_bucket_name
     origin_access_control_id = aws_cloudfront_origin_access_control.this.id
 
@@ -16,10 +16,17 @@ resource "aws_cloudfront_distribution" "feedback_app" {
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = var.s3_bucket_name
 
+
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
   }
 
   restrictions {

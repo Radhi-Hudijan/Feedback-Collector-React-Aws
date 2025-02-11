@@ -42,7 +42,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:*",
           "lambda:*",
           "cognito-idp:*",
-          "cognito-sync:*"
+          "cognito-sync:*",
+          "apigateway:*",
         ],
         "Resource" : "*"
       }
