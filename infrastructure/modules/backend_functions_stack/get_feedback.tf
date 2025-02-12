@@ -3,7 +3,7 @@ resource "aws_lambda_function" "get_feedback" {
   filename      = "get_feedback_lambda.zip"
   function_name = "get_feedback"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "index.mjs"
+  handler       = "index.handler"
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
