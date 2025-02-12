@@ -24,10 +24,12 @@ resource "aws_apigatewayv2_integration" "http_integration" {
 }
 
 resource "aws_apigatewayv2_route" "http_route" {
-  count     = var.functions != null ? length(var.functions) : 0
-  api_id    = aws_apigatewayv2_api.http_api.id
-  route_key = var.functions[count.index].route_key
-  target    = "integrations/${aws_apigatewayv2_integration.http_integration[count.index].id}"
+  count              = var.functions != null ? length(var.functions) : 0
+  api_id             = aws_apigatewayv2_api.http_api.id
+  route_key          = var.functions[count.index].route_key
+  target             = "integrations/${aws_apigatewayv2_integration.http_integration[count.index].id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.cognito_authorizer.id
 }
 
 # Lambda permission to invoke the API Gateway
